@@ -1,5 +1,4 @@
 const express = require('express');
-const app = require('../../server');
 const minionsRouter = express.Router();
 
 // GET array of all minions
