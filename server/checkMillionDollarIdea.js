@@ -1,13 +1,19 @@
 const checkMillionDollarIdea = (req, res, next) => {
-  let weeklyRevenue = 0;
-  let numWeeks = 0;
-  while (weeklyRevenue * numWeeks < 1000000) {
-    weeklyRevenue = Math.floor(Math.random() * 123562);
-    numWeeks = Math.floor(Math.random() * 104) + 6;
+  let weeklyRevenue = req.body['weeklyRevenue'];
+  let numWeeks = req.body['numWeeks'];
+  try {
+    weeklyRevenue = Number(weeklyRevenue);
+    numWeeks = Number(numWeeks);
+    if (!numWeeks || !weeklyRevenue || weeklyRevenue * numWeeks < 1000000) {
+        res.status(400).send();
+      } else {
+        req.body['weeklyRevenue'] = weeklyRevenue;
+        req.body['numWeeks'] = numWeeks;
+        next();
+      }
+  } catch(e) {
+    res.status(400).send(e);
   }
-  req.body['weeklyRevenue'] = weeklyRevenue;
-  req.body['numWeeks'] = numWeeks;
-  next();
 };
 
 // Leave this exports assignment so that the function can be used elsewhere

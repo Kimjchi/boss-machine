@@ -4,7 +4,7 @@ const meetingsRouter = express.Router();
 
 // GET array of all meetings
 meetingsRouter.get('/', (req, res, next) => {
-    res.send(getAllFromDatabase('meetings')['data']);
+    res.send(getAllFromDatabase('meetings'));
 });
 
 // POST create a new meeting and save it to the database
